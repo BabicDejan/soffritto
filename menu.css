@@ -28,6 +28,7 @@ html,
 body {
     margin: 0;
     min-height: 100%;
+    overflow: hidden;
     font-family:
         "Inter",
         system-ui,
@@ -60,6 +61,7 @@ button {
 .menu-shell {
     display: grid;
     grid-template-columns: var(--rail-width) minmax(0, 1fr);
+    height: 100vh;
     min-height: 100vh;
 }
 
@@ -85,7 +87,8 @@ button {
             rgba(255, 255, 255, 0) 18%
         ),
         linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-dark-2) 100%);
-    overflow: visible;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .menu-nav {
@@ -186,7 +189,7 @@ button {
     right: -1px;
     border-bottom-right-radius: var(--nav-radius);
     /* X: 15px (desno), Y: 7px (dolje) */
-    box-shadow: 15px 7px 0 0 var(--panel-bg);
+    box-shadow: 5px 7px 0 0 var(--panel-bg);
 }
 
 .menu-nav__curve-bottom {
@@ -201,26 +204,45 @@ button {
        X: 15px (ostaje pozitivno da bi guralo desno u panel)
        Y: -7px (negativno da bi guralo GORE, prateći tvojih 7px sa top-a)
     */
-    box-shadow: 15px -7px 0 0 var(--panel-bg);
+    box-shadow: 5px -7px 0 0 var(--panel-bg);
 }
 
 /* DESNI PANEL */
 .menu-panel {
     position: relative;
-    z-index: 2;
+    z-index: 30;
     min-width: 0;
+    height: 100vh;
     padding: 24px 16px 28px;
     margin-left: -1px;
     background: var(--panel-bg);
-    border-radius: var(--nav-radius) 0 0 var(--nav-radius);
-    box-shadow: inset 1px 0 0 var(--panel-bg);
-    overflow: hidden;
+    box-shadow: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.menu-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 4px;
+    height: 100%;
+    background: var(--panel-bg);
+    pointer-events: none;
+    z-index: 20;
 }
 
 .menu-panel__header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    padding: 8px 0 12px;
+    margin: 0;
+    background: var(--panel-bg);
 }
 
 .menu-brand {
@@ -242,16 +264,28 @@ button {
 .menu-category {
     width: min(100%, var(--content-max));
     margin: 0 auto;
+    padding-top: 8px;
 }
 
 .menu-category__header {
-    display: block;
-    margin-bottom: 18px;
+    position: sticky;
+    top: 112px;
+    z-index: 55;
+    margin: 0 0 8px;
     text-align: left;
+    background: var(--panel-bg);
+    padding: 0;
+    box-shadow: 0 6px 10px rgba(245, 245, 243, 0.96);
+}
+
+.menu-category__header-inner {
+    display: block;
+    padding: 10px 0 8px;
+    background: var(--panel-bg);
 }
 
 .menu-category__eyebrow {
-    margin: 0 0 4px;
+    margin: 0 0 6px;
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.14em;

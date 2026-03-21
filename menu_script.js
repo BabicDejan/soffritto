@@ -102,7 +102,7 @@
         ],
       },
       paste: {
-        title: "PASTE",
+        title: "PASTE/NJOKE",
         items: [
           {
             name: "All’Ortolana",
