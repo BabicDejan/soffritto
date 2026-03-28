@@ -40,6 +40,13 @@ body {
     color: var(--text-dark);
 }
 
+/* Na mobilnom, panel scrolluje - dodaj padding na dno da poslednja stavka bude vidljiva */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .menu-panel {
+        padding-bottom: calc(28px + env(safe-area-inset-bottom));
+    }
+}
+
 body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -207,19 +214,19 @@ button {
     box-shadow: 5px -7px 0 0 var(--panel-bg);
 }
 
-/* DESNI PANEL */
+/* DESNI PANEL - grid layout: header fiksiran gore, sadržaj scrolluje ispod */
 .menu-panel {
     position: relative;
     z-index: 30;
     min-width: 0;
     height: 100vh;
-    padding: 24px 16px 28px;
     margin-left: -1px;
     background: var(--panel-bg);
     box-shadow: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+    /* Grid: header zauzima auto visinu, ostatak scrolluje */
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
 }
 
 .menu-panel::before {
@@ -235,14 +242,25 @@ button {
 }
 
 .menu-panel__header {
-    position: sticky;
-    top: 0;
+    /* Više nije sticky - grid red koji uvijek ostaje na vrhu */
+    position: relative;
     z-index: 60;
     display: flex;
     justify-content: center;
-    padding: 8px 0 12px;
+    padding: 24px 0 12px;
     margin: 0;
     background: var(--panel-bg);
+    /* Suptilna sjenka dolje da se vidi odvajanje od sadržaja */
+    box-shadow: 0 4px 12px rgba(245, 245, 243, 0.9);
+}
+
+/* Scroll wrapper - drugi grid red, scrolluje sadržaj ISPOD headera */
+.menu-panel__body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 16px max(28px, calc(28px + env(safe-area-inset-bottom, 0px)));
+    scroll-padding-bottom: 24px;
 }
 
 .menu-brand {
@@ -269,7 +287,7 @@ button {
 
 .menu-category__header {
     position: sticky;
-    top: 112px;
+    top: 0;
     z-index: 55;
     margin: 0 0 8px;
     text-align: left;
