@@ -143,13 +143,13 @@
             name: "Bolonjski biser",
             meta: "400g",
             price: "4,80€",
-            desc: "Svježa fokača, mortadela, pistaći, rukola, med, stracatela sir",
+            desc: "Svježa fokača, mortadela, pistaći, rukola, med, rikota sir",
           },
           {
             name: "L’Antico",
             meta: "400g",
             price: "4,80€",
-            desc: "Svježa fokača, pršut, pesto, stracatela sir, rukola",
+            desc: "Svježa fokača, pršut, pesto, rikota sir, rukola, sušeni paradajz",
           },
           {
             name: "Hrskava Toskana",
