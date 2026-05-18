@@ -76,7 +76,7 @@
         items: [
           { name: "Espresso", price: "1,40€" },
           { name: "Dupli Espresso", price: "2,50€" },
-          { name: "Kabano", price: "2,50€" },
+          { name: "Kubano", price: "2,50€" },
           { name: "Dojč", price: "1,80€" },
           { name: "Cappuccino", price: "1,80€" },
           { name: "Macchiato", price: "1,60€" },
